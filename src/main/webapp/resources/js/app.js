@@ -164,6 +164,45 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+      let summaryQuantityCategory = document.querySelector(".summary-quantity-category");
+      const selectedQuantity = document.querySelector("input[name='quantity']");
+      const selectedCategory = document.querySelectorAll("input[name='category']:checked + span + span");
+      summaryQuantityCategory.innerText = selectedQuantity.value + " szt. worków zawierających ";
+      // let categoryName = "";
+      // if(selectedCategory.length > 0) {
+      //   for (let i = 0; i <= selectedCategory.length; i++) {
+      //     categoryName += selectedCategory[i].innerText + " ";
+      //   }
+      // }
+      // summaryQuantityCategory.innerText = selectedQuantity.value + " szt. worków zawierających " + categoryName;
+
+      const summaryInstitution = document.querySelector(".summary-institution");
+      const selectedInstitution = document.querySelector(".selected-institution");
+      // summaryInstitution.innerText = "Dla fundacji: " + selectedInstitution.value;
+
+      const summaryStreet = document.querySelector(".summary-street");
+      const selectedStreet = document.querySelector("input[name='street']");
+      summaryStreet.innerText = selectedStreet.value;
+      const summaryCity = document.querySelector(".summary-city");
+      const selectedCity = document.querySelector("input[name='city']");
+      summaryCity.innerText = selectedCity.value;
+      const summaryZipCode = document.querySelector(".summary-zipCode");
+      const selectedZipCode = document.querySelector("input[name='zipCode']");
+      summaryZipCode.innerText = selectedZipCode.value;
+      const summaryPhone = document.querySelector(".summary-phone");
+      const selectedPhone = document.querySelector("input[name='phone']");
+      summaryPhone.innerText = selectedPhone.value;
+      const summaryPickUpDate = document.querySelector(".summary-pickUpDate");
+      const selectedPickUpDate = document.querySelector("input[name='pickUpDate']");
+      summaryPickUpDate.innerText = selectedPickUpDate.value;
+      const summaryPickUpTime = document.querySelector(".summary-pickUpTime");
+      const selectedPickUpTime = document.querySelector("input[name='pickUpTime']");
+      summaryPickUpTime.innerText = selectedPickUpTime.value;
+      const summaryPickUpComment = document.querySelector(".summary-pickUpComment");
+      const selectedPickUpComment = document.querySelector("input[name='pickUpComment']");
+      summaryPickUpComment.innerText = selectedPickUpComment.value;
+
+
     }
 
   }
@@ -171,4 +210,6 @@ document.addEventListener("DOMContentLoaded", function() {
   if (form !== null) {
     new FormSteps(form);
   }
+
+
 });
