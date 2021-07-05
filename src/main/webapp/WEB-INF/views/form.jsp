@@ -9,7 +9,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-  <title>Document</title>
+  <title>Przekaż dary!</title>
 
   <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
@@ -39,7 +39,7 @@
       <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form method="post" modelAttribute="donation" action="/form" name="donationForm">
+        <form:form method="post" modelAttribute="donation" action="/donate" name="donationForm">
           <!-- STEP 1: class .active is switching steps -->
           <div data-step="1" class="active">
             <h3>Zaznacz co chcesz oddać:</h3>
@@ -48,6 +48,7 @@
               <div class="form-group form-group--checkbox">
               <label>
                 <input type="checkbox" name="category" value="${categoryList.id}"/>
+                <form:errors path="categoryList" cssClass="error"/>
                 <span class="checkbox"></span>
                 <span class="description selected-category">${categoryList.name}</span>
               </label>
@@ -67,6 +68,7 @@
               <label>
                 Liczba 60l worków:
                 <form:input type="number" name="quantity" step="1" min="1"  path="quantity"/>
+                <form:errors path="quantity" cssClass="error"/>
               </label>
             </div>
 
@@ -84,7 +86,8 @@
             <c:forEach items="${institutions}" var="institutions">
             <div class="form-group form-group--checkbox">
               <label>
-                  <form:radiobutton path="institution" name="organization" value="${institutions.id}"/>
+                  <form:radiobutton cssClass="radiobtn" path="institution" name="organization" value="${institutions.id}"/>
+                <form:errors path="institution" cssClass="error"/>
                 <span class="checkbox radio"></span>
                 <span class="description">
                   <div class="title selected-institution">Fundacja “${institutions.name}”</div>
@@ -108,21 +111,25 @@
                 <h4>Adres odbioru</h4>
                 <div class="form-group form-group--inline">
                   <label> Ulica <form:input type="text" name="street" path="street" /> </label>
+                  <form:errors path="street" cssClass="error"/>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label> Miasto <form:input type="text" name="city" path="city" /> </label>
+                  <form:errors path="city" cssClass="error"/>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
                     Kod pocztowy <form:input type="text" name="postcode" path="zipCode"/>
+                    <form:errors path="zipCode" cssClass="error"/>
                   </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
                     Numer telefonu <form:input type="phone" name="phone" path="phone" />
+                    <form:errors path="phone" cssClass="error"/>
                   </label>
                 </div>
               </div>
@@ -131,16 +138,19 @@
                 <h4>Termin odbioru</h4>
                 <div class="form-group form-group--inline">
                   <label> Data <form:input type="date" name="data" path="pickUpDate" /> </label>
+                  <form:errors path="pickUpDate" cssClass="error"/>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label> Godzina <form:input type="time" name="time" path="pickUpTime" cssClass="selected-pickUpTime"/> </label>
+                  <form:errors path="pickUpTime" cssClass="error"/>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
                     Uwagi dla kuriera
                     <form:textarea name="more_info" rows="5" path="pickUpComment" cssClass="selected-pickUpComment"></form:textarea>
+                    <form:errors path="pickUpComment" cssClass="error"/>
                   </label>
                 </div>
               </div>

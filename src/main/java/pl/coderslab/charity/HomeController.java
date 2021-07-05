@@ -33,7 +33,12 @@ public class HomeController {
     public String homeAction(Model model) {
         //nowa lista z 2 institution
         //lista fundacji
+        //List<ArrayList> newList = new ArrayList<>();
         List<Institution> institutions = institutionRepository.findAll();
+//        int size = institutions.size();
+//        for (int i =0; i < size; i++) {
+//            newList.add(institutions);
+//        }
         model.addAttribute("institutions", institutions);
         //ilość przekazanych darów
         int countDonations = donationRepository.countDonations();

@@ -166,19 +166,19 @@ document.addEventListener("DOMContentLoaded", function() {
       // TODO: get data from inputs and show them in summary
       let summaryQuantityCategory = document.querySelector(".summary-quantity-category");
       const selectedQuantity = document.querySelector("input[name='quantity']");
-      const selectedCategory = document.querySelectorAll("input[name='category']:checked + span + span");
-      summaryQuantityCategory.innerText = selectedQuantity.value + " szt. worków zawierających ";
-      // let categoryName = "";
-      // if(selectedCategory.length > 0) {
-      //   for (let i = 0; i <= selectedCategory.length; i++) {
-      //     categoryName += selectedCategory[i].innerText + " ";
-      //   }
-      // }
-      // summaryQuantityCategory.innerText = selectedQuantity.value + " szt. worków zawierających " + categoryName;
-
+      const selectedCategory = document.querySelectorAll("input[name='category']:checked ~ span.description");
+      let categoryName = "";
+      if(selectedCategory.length > 0) {
+        for (let i = 0; i < selectedCategory.length; i++) {
+          categoryName += selectedCategory[i].innerText.toLowerCase() + ", ";
+        }
+      }
+      summaryQuantityCategory.innerText = selectedQuantity.value + " szt. worków zawierających: " + categoryName;
       const summaryInstitution = document.querySelector(".summary-institution");
-      const selectedInstitution = document.querySelector(".selected-institution");
-      // summaryInstitution.innerText = "Dla fundacji: " + selectedInstitution.value;
+      const selectedInstitution = document.querySelector(".radiobtn:checked ~ span.description > div.title"); //radiobutton to dalej input ale o type radio
+      if(selectedInstitution != null) {
+        summaryInstitution.innerText = "Dla fundacji: " + selectedInstitution.innerText;
+      }
 
       const summaryStreet = document.querySelector(".summary-street");
       const selectedStreet = document.querySelector("input[name='street']");
@@ -200,9 +200,9 @@ document.addEventListener("DOMContentLoaded", function() {
       summaryPickUpTime.innerText = selectedPickUpTime.value;
       const summaryPickUpComment = document.querySelector(".summary-pickUpComment");
       const selectedPickUpComment = document.querySelector("input[name='pickUpComment']");
-      summaryPickUpComment.innerText = selectedPickUpComment.value;
-
-
+      if(selectedPickUpComment != null) {
+        summaryPickUpComment.innerText = selectedPickUpComment.innerText;//tu textarea więc nie value ale innerText!!
+      }
     }
 
   }

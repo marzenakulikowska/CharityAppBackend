@@ -8,7 +8,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Document</title>
+    <title>Zacznij pomagać!</title>
 
     <link rel="stylesheet" href="<c:url value="resources/css/style.css"/>"/>
 </head>
@@ -61,8 +61,8 @@
             <p>kurier przyjedzie w dogodnym terminie</p>
         </div>
     </div>
-    <a href="/form" class="btn btn--large">Oddaj rzeczy</a>
-    <a href="#" class="btn btn--large">Załóż konto</a>
+    <a href="/donate" class="btn btn--large">Oddaj rzeczy</a>
+    <a href="/register" class="btn btn--large">Załóż konto</a>
 </section>
 
 <section class="about-us">
@@ -86,7 +86,7 @@
 
         <ul class="help--slides-items">
             <li>
-                <c:forEach items="${institutions}" var="institution">
+                <c:forEach items="${institutions}" var="institution" varStatus="status">
                     <div class="col">
                         <div class="title">${institution.name}</div>
                         <div class="subtitle">${institution.description}</div>

@@ -1,8 +1,13 @@
 package pl.coderslab.charity.entity;
 
+import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,16 +19,23 @@ public class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Positive
     private Integer quantity;
     @ManyToMany
     private List<Category> categoryList = new ArrayList<>();
     @ManyToOne
+    @NotNull
     private Institution institution;
+    @NotNull
     private String street;
+    @NotNull
     private String city;
+    @NotNull
     private String zipCode;
+    @NotNull
     private String phone;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Future
     private LocalDate pickUpDate;
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickUpTime;

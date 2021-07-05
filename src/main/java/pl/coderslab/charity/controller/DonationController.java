@@ -1,6 +1,7 @@
 package pl.coderslab.charity.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +12,7 @@ import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +30,7 @@ public class DonationController {
         this.categoryRepository = categoryRepository;
     }
     //FORMULARZ DODAWANIA DARÓW
-    @RequestMapping(value = "/form")
+    @RequestMapping(value = "/donate")
     public String getFormDonation(Model model) {
         Donation donation = new Donation();
         model.addAttribute("donation", donation);
@@ -41,10 +43,13 @@ public class DonationController {
         return "form";
     }
     //ZAPIS DO BAZY DANYCH DONATION
-    @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String postDonation(Donation donation) {
+    @RequestMapping(value = "/donate", method = RequestMethod.POST)
+    public String postDonation(@ModelAttribute @Valid Donation donation, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "form";
+        }
         donationRepository.save(donation);
-        return "index";
+        return "form-confirmation";
     }
 
 }
