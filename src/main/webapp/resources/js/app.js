@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const selectedPickUpTime = document.querySelector("input[name='pickUpTime']");
       summaryPickUpTime.innerText = selectedPickUpTime.value;
       const summaryPickUpComment = document.querySelector(".summary-pickUpComment");
-      const selectedPickUpComment = document.querySelector("input[name='pickUpComment']");
+      const selectedPickUpComment = document.querySelector("textarea[name='pickUpComment']");
       if(selectedPickUpComment != null) {
         summaryPickUpComment.innerText = selectedPickUpComment.innerText;//tu textarea więc nie value ale innerText!!
       }

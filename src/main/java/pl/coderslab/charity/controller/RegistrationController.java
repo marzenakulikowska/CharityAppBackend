@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.charity.entity.User;
 import pl.coderslab.charity.repository.UserRepository;
@@ -18,25 +20,34 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
+
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public RegistrationController(UserRepository userRepository) {
+    public RegistrationController(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
     //FORMULARZ DODAWANIA UŻYTKOWNIKÓW
     @GetMapping("/register")
     public String getRegistrationForm(Model model) {
         User user = new User();
+        //TODO Do modelu wstawiamy atrybut o nazwie "userRegister" ...
         model.addAttribute("userRegister", user);
 
         return "register";
     }
     //ZAPIS UŻYTKOWNIKA DO BAZY
     @PostMapping("/register")
-    public String register(@Valid User user, BindingResult result) {
+    //TODO(ciąg dalszy tego co wyżej) A tutaj w modelu ląduje atrybut o nazwie "user"
+    //                                Użyć @ModelAttribute("userRegister") aby parametr user był
+    //                                w modelu pod tą samą nazwą co w metodzie getRegistrationForm
+    public String register(@ModelAttribute("userRegister") @Valid User user, BindingResult result) {
         if (result.hasErrors()) {
             return "register";
         }
+        //TODO Zamiast ręcznie używać BCryptPasswordEncoder to wstrzyknąć go sobie np. definicji
+        //     z WebSecurityConfig (patrz 1.)
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String encodePassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);

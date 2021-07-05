@@ -35,10 +35,13 @@ public class DonationController {
         Donation donation = new Donation();
         model.addAttribute("donation", donation);
         //lista kategorii
-        List<Category> categoryList = categoryRepository.findAll();
-        model.addAttribute("categoryList", categoryList);
+        List<Category> categories = categoryRepository.findAll();
+        model.addAttribute("categories", categories);
         //lista fundacji
         List<Institution> institutions = institutionRepository.findAll();
+        for (Institution institution : institutions) {
+
+        }
         model.addAttribute("institutions", institutions);
         return "form";
     }

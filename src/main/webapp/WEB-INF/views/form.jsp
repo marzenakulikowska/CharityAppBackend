@@ -44,13 +44,13 @@
           <div data-step="1" class="active">
             <h3>Zaznacz co chcesz oddać:</h3>
 
-              <c:forEach items="${categoryList}" var="categoryList">
+              <c:forEach items="${categories}" var="category">
               <div class="form-group form-group--checkbox">
               <label>
-                <input type="checkbox" name="category" value="${categoryList.id}"/>
-                <form:errors path="categoryList" cssClass="error"/>
+                  <input type="checkbox" name="categoryList" value="${category.id}"/>
+                  <form:errors path="categoryList" cssClass="error"/>
                 <span class="checkbox"></span>
-                <span class="description selected-category">${categoryList.name}</span>
+                <span class="description selected-category">${category.name}</span>
               </label>
               </div>
               </c:forEach>
